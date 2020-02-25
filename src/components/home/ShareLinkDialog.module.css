@@ -1,0 +1,16 @@
+.dialog pre {
+  background-color: var(--geist-cyan);
+  color: #000;
+}
+
+.dialog li:first-child {
+  list-style-type: "🚀";
+}
+.dialog li:last-child {
+  list-style-type: "🤯";
+}
+.dialog [data-cta] {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

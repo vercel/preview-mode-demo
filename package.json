@@ -8,8 +8,19 @@
     "start": "next start"
   },
   "dependencies": {
-    "next": "9.2.2",
-    "react": "16.12.0",
-    "react-dom": "16.12.0"
+    "@reach/dialog": "^0.8.5",
+    "aws-sdk": "^2.632.0",
+    "next": "^9.2.3-canary.23",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "shortid": "^2.2.15",
+    "slate": "^0.57.1",
+    "slate-history": "^0.57.1",
+    "slate-react": "^0.57.1"
+  },
+  "devDependencies": {
+    "@types/node": "^13.7.7",
+    "@types/react": "^16.9.23",
+    "typescript": "^3.8.3"
   }
 }

@@ -1,0 +1,87 @@
+.button {
+  position: fixed;
+
+  width: calc(var(--gap) * 3);
+  height: calc(var(--gap) * 3);
+  padding: calc(var(--gap-half) * 1.5);
+
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 var(--accents-3);
+  cursor: pointer;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.button:active {
+  box-shadow: 0 0 0 5px var(--accents-3);
+}
+
+.cancel {
+  composes: button;
+
+  /* right: calc(.button.width + .button.right + spacer) */
+  right: calc(var(--gap) * 3 + var(--gap-double) + var(--gap));
+  bottom: var(--gap-double);
+
+  background-color: var(--geist-warning-light);
+}
+
+@media (max-width: 768px) {
+  .cancel {
+    /* right: calc(.button.width + .button.right + spacer) */
+    right: calc(var(--gap) * 3 + var(--gap) + var(--gap-half));
+    bottom: var(--gap);
+  }
+}
+
+@media (hover: hover) {
+  .cancel:hover {
+    background-color: var(--geist-warning);
+  }
+}
+.cancel:active {
+  background-color: var(--geist-warning-dark);
+}
+
+.cancel svg {
+  color: white;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.share {
+  composes: button;
+
+  right: var(--gap-double);
+  bottom: var(--gap-double);
+
+  background-color: var(--geist-success-light);
+}
+
+@media (max-width: 768px) {
+  .share {
+    right: var(--gap);
+    bottom: var(--gap);
+  }
+}
+
+@media (hover: hover) {
+  .share:hover {
+    background-color: var(--geist-success);
+  }
+}
+.share:active {
+  background-color: var(--geist-success-dark);
+}
+
+.share svg {
+  color: white;
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.pending-bg {
+  background-color: var(--accents-3);
+}

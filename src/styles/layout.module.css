@@ -1,0 +1,46 @@
+.layout {
+  padding-top: var(--gap-double);
+}
+
+.layout aside {
+  z-index: 2;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--geist-success-light);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  color: #fff;
+}
+
+.layout aside a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.layout aside a::after {
+  content: " — Click to Exit";
+}
+
+@media (max-width: 768px) {
+  .layout aside a::after {
+    content: " — Tap to Exit";
+  }
+}
+
+.layout img,
+.layout svg {
+  margin: auto;
+  max-width: 98%;
+  display: block;
+  height: auto;
+}
+
+.layout h1,
+.layout h2 {
+  max-width: min(var(--width-tablet), calc(100vw - var(--gap-double)));
+  margin: 0 auto;
+  text-align: center;
+}

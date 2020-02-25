@@ -1,0 +1,206 @@
+:root {
+  --gap-quarter: 0.25rem;
+  --gap-half: 0.5rem;
+  --gap: 1rem;
+  --gap-double: 2rem;
+
+  --width-tablet: 768px;
+
+  --bg: #fff;
+  --fg: #000;
+  --accents-1: #111;
+  --accents-2: #333;
+  --accents-3: #888;
+  --geist-foreground: #000;
+
+  --geist-warning-light: #f7b955;
+  --geist-warning: #f5a623;
+  --geist-warning-dark: #f49b0b;
+  --geist-success-light: #3291ff;
+  --geist-success: #0070f3;
+  --geist-success-dark: #0366d6;
+  --geist-cyan: #79ffe1;
+
+  --radius: 8px;
+
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  --font-mono: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
+    Bitstream Vera Sans Mono, Courier New, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+
+  background-image: radial-gradient(#ddd 1px, transparent 1px),
+    radial-gradient(#ddd 1px, transparent 1px);
+  background-position: 0 0, 25px 25px;
+  background-attachment: fixed;
+  background-size: 50px 50px;
+
+  /* Hack */
+  overflow-x: hidden;
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 2rem auto;
+  width: var(--width-tablet);
+  max-width: calc(100vw - (var(--gap-double) * 2));
+}
+
+.feature {
+  flex: 0 0 25%;
+  align-items: center;
+  display: inline-flex;
+  margin: 0 auto;
+}
+
+.feature > h4 {
+  margin: 0 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .feature {
+    flex-direction: column;
+    margin-bottom: var(--gap);
+  }
+  .feature > h4 {
+    margin: 0;
+    font-size: 0.75rem;
+  }
+
+  .features {
+    margin: var(--gap) auto 0;
+  }
+}
+
+h1 {
+  white-space: pre-wrap;
+  margin: var(--gap-double) 0 calc(0.5 * var(--gap)) 0;
+  font-size: 2.25rem;
+  font-weight: 800;
+  letter-spacing: -0.05rem;
+}
+
+h2 {
+  white-space: pre-wrap;
+  font-weight: 600;
+  font-size: 1.25rem;
+  letter-spacing: -0.02rem;
+  color: var(--accents-2);
+}
+
+@media (max-width: 768px) {
+  h2 {
+    font-size: 0.95rem;
+    letter-spacing: 0;
+  }
+}
+
+.explanation {
+  font-size: 1rem;
+  max-width: min(var(--width-tablet), calc(100vw - var(--gap-double)));
+  margin: var(--gap-half) auto;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+a:hover {
+  color: #3291ff;
+}
+
+div.p {
+  display: block;
+  margin-block-start: 2em;
+  margin-block-end: 2em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  color: var(--accents-2);
+  font-weight: 600;
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+span.span {
+  display: inline-block;
+  width: 100%;
+}
+
+input,
+button,
+textarea {
+  margin: 0;
+  border: 1px solid #d1d1d1;
+  border-radius: 5px;
+  padding: 0.5em;
+  vertical-align: middle;
+  white-space: normal;
+  background: none;
+  line-height: 1;
+  font-size: 1rem;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+button {
+  padding: 0.65em 1em;
+  background: #0076ff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+input:focus,
+textarea:focus,
+button:focus {
+  outline: 0;
+  border-color: #0076ff;
+}
+button:hover {
+  background: rgba(0, 118, 255, 0.8);
+}
+button:focus {
+  box-shadow: 0 0 0 2px rgba(0, 118, 255, 0.5);
+}
+button:disabled {
+  pointer-events: none;
+  background: #999;
+}
+
+.dotted {
+  border-bottom: 1px dashed black;
+}
+
+[contenteditable="true"] {
+  outline: 2px dashed var(--accents-3) !important;
+  background-color: inherit;
+  transition: all 0.2s ease;
+}
+[contenteditable="true"]:focus {
+  background-color: rgb(253, 236, 189);
+  color: var(--fg);
+  transition: all 0.2s ease;
+}

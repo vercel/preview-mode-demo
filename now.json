@@ -1,0 +1,8 @@
+{
+  "public": false,
+  "env": {
+    "AWS_S3_ACCESS_KEY_ID": "@nextjs-preview-user-id",
+    "AWS_S3_SECRET_ACCESS_KEY": "@nextjs-preview-user-secret",
+    "AWS_S3_BUCKET": "next-preview-demo"
+  }
+}

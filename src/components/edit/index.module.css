@@ -1,0 +1,41 @@
+.edit {
+  position: fixed;
+  right: var(--gap-double);
+  bottom: var(--gap-double);
+
+  width: calc(var(--gap) * 3);
+  height: calc(var(--gap) * 3);
+  padding: calc(var(--gap-half) * 1.5);
+
+  background-color: var(--geist-success-light);
+  border-radius: 50%;
+  box-shadow: 0 6px 10px 0 var(--accents-3);
+
+  cursor: pointer;
+
+  transition: all 0.1s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .edit {
+    right: var(--gap);
+    bottom: var(--gap);
+  }
+}
+
+@media (hover: hover) {
+  .edit:hover {
+    background-color: var(--geist-success);
+  }
+}
+.edit:active {
+  background-color: var(--geist-success-dark);
+  box-shadow: 0 0 0 5px var(--accents-3);
+}
+
+.edit svg {
+  color: white;
+  display: block;
+  width: 100%;
+  height: auto;
+}
