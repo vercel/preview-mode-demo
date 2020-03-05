@@ -18,3 +18,10 @@
 .copy {
   cursor: pointer;
 }
+
+.tooltip {
+  border-radius: 0.25rem;
+  background-color: black;
+  color: white;
+  padding: 0.25rem;
+}
