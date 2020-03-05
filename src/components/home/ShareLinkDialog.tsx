@@ -1,4 +1,6 @@
 import { Dialog } from "@reach/dialog";
+import copy from "copy-to-clipboard";
+import { useCallback } from "react";
 import styles from "./ShareLinkDialog.module.css";
 
 export function ShareLinkDialog({
@@ -8,12 +10,20 @@ export function ShareLinkDialog({
   snapshotId: string;
   onExit: () => void;
 }) {
+  const shareUrl = `${window.origin}/s/${encodeURI(snapshotId)}`;
+
+  const copyShareUrl = useCallback(() => {
+    copy(shareUrl);
+  }, [shareUrl]);
+
   return (
     <Dialog isOpen onDismiss={onExit} className={styles.dialog}>
       <div className="p">
         You can now share your edits with anyone:
         <br />
-        <pre>{`${window.origin}/s/${encodeURI(snapshotId)}`}</pre>
+        <pre className={styles.copy} onClick={copyShareUrl}>
+          {shareUrl}
+        </pre>
       </div>
       <div className="p">
         What happened?
