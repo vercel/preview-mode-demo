@@ -194,6 +194,12 @@ button:disabled {
   border-bottom: 1px dashed black;
 }
 
+hr {
+  border: none;
+  border-bottom: 1px solid #efefef;
+  margin: 2em auto;
+}
+
 [contenteditable="true"] {
   outline: 2px dashed var(--accents-3) !important;
   background-color: inherit;

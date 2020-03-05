@@ -54,7 +54,7 @@ export async function getStaticProps({
             // objects, but the bucket itself is private.
             e.statusCode === 403
               ? "The requested preview edit does not exist!"
-              : "An unknown error has occurred. Please refresh the page or exit Preview Mode."
+              : "An error has occurred while connecting to S3. Please refresh the page to try again."
         }
       };
     }
@@ -110,7 +110,6 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
   }, []);
 
   const edits = props.isPreview ? props.contents : [];
-  // TODO: handle `props.message` when `props.hasError`
   return (
     <>
       <Head>
@@ -128,141 +127,25 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
             <a href="/api/exit">Preview Mode</a>
           </aside>
         )}
-        <Malleable id="title" as="h1" isActive={isEdit} edits={edits}>
-          My Static Site
-        </Malleable>
-
-        <div className="features">
-          <div className="feature">
-            <Malleable
-              id="feature-1-emoji"
-              as="div"
-              isActive={isEdit}
-              edits={edits}
-            >
-              ⚡
-            </Malleable>
-            <Malleable
-              id="feature-1-text"
-              as="h4"
-              isActive={isEdit}
-              edits={edits}
-            >
-              Blazing fast
-            </Malleable>
-          </div>
-          <div className="feature">
-            <Malleable
-              id="feature-2-emoji"
-              as="div"
-              isActive={isEdit}
-              edits={edits}
-            >
-              📡
-            </Malleable>
-            <Malleable
-              id="feature-2-text"
-              as="h4"
-              isActive={isEdit}
-              edits={edits}
-            >
-              Always available
-            </Malleable>
-          </div>
-          <div className="feature">
-            <Malleable
-              id="feature-3-emoji"
-              as="div"
-              isActive={isEdit}
-              edits={edits}
-            >
-              🏎
-            </Malleable>
-            <Malleable
-              id="feature-3-text"
-              as="h4"
-              isActive={isEdit}
-              edits={edits}
-            >
-              Lighthouse 100
-            </Malleable>
-          </div>
-        </div>
-
-        <Malleable as="h2" id="title-2" isActive={isEdit} edits={edits}>
-          This demonstrates a static website generated using{" "}
-          <a target="_blank" rel="noopener" href="https://nextjs.org">
-            Next.js'
-          </a>{" "}
-          new{" "}
-          <a
-            target="_blank"
-            rel="noopener"
-            href="https://github.com/zeit/next.js/issues/9524"
-          >
-            Static Site Generation (SSG)
-          </a>
-          .
-        </Malleable>
-
-        <div className="explanation">
-          <div className="p">
-            <Malleable
-              id="explanation-1-inspect"
-              as="span"
-              isActive={isEdit}
-              edits={edits}
-            >
-              To inspect the response from{" "}
-              <a
-                target="_blank"
-                rel="noopener"
-                href="https://zeit.co/smart-cdn"
-              >
-                our edge network
-              </a>
-              , run:
-            </Malleable>
-            <br />
-            <Malleable
-              id="explanation-1-pre-curl"
-              as="pre"
-              isActive={isEdit}
-              edits={edits}
-            >
-              curl -sI https://preview.ssg.how | grep x-now
-            </Malleable>
-            <Malleable
-              id="explanation-1-pre-response"
-              as="pre"
-              className="light"
-              isActive={isEdit}
-              edits={edits}
-            >
-              x-now-cache: HIT
-              <br />
-              x-now-trace: sfo1
-              <br />
-              x-now-id: sfo1:7c7lc-1583269874370-6a496f5a4e91
-            </Malleable>
-          </div>
-          <Malleable id="explanation-2" isActive={isEdit} edits={edits}>
-            When people visit this site, the response always comes instantly
-            from their{" "}
-            <a target="_blank" rel="noopener" href="https://zeit.co/smart-cdn">
-              nearest location
-            </a>
-            .
-          </Malleable>
-          <Malleable id="explanation-3" isActive={isEdit} edits={edits}>
-            Unlike traditional static solutions, however, you can generate
-            previews of edits that you can share with anyone you choose.
-          </Malleable>
-          <Malleable id="explanation-4" isActive={isEdit} edits={edits}>
-            This makes Next.js the most optimal framework to integrate into your
-            Headless CMS workflow.
-          </Malleable>
-        </div>
+        {props.hasError ? (
+          <>
+            <h1>Oops</h1>
+            <h2>Something unique to your preview went wrong.</h2>
+            <div className="explanation" style={{ textAlign: "center" }}>
+              <p>
+                The production website is <strong>still available</strong> and
+                this does not affect other users.
+              </p>
+            </div>
+            <hr />
+            <h2>Reason</h2>
+            <div className="explanation" style={{ textAlign: "center" }}>
+              <p>{props.message}</p>
+            </div>
+          </>
+        ) : (
+          <Content isEdit={isEdit} edits={edits} />
+        )}
       </div>
       {isEdit ? (
         <>
@@ -278,5 +161,140 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
     </>
   );
 };
+
+function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
+  return (
+    <>
+      <Malleable id="title" as="h1" isActive={isEdit} edits={edits}>
+        My Static Site
+      </Malleable>
+      <div className="features">
+        <div className="feature">
+          <Malleable
+            id="feature-1-emoji"
+            as="div"
+            isActive={isEdit}
+            edits={edits}
+          >
+            ⚡
+          </Malleable>
+          <Malleable
+            id="feature-1-text"
+            as="h4"
+            isActive={isEdit}
+            edits={edits}
+          >
+            Blazing fast
+          </Malleable>
+        </div>
+        <div className="feature">
+          <Malleable
+            id="feature-2-emoji"
+            as="div"
+            isActive={isEdit}
+            edits={edits}
+          >
+            📡
+          </Malleable>
+          <Malleable
+            id="feature-2-text"
+            as="h4"
+            isActive={isEdit}
+            edits={edits}
+          >
+            Always available
+          </Malleable>
+        </div>
+        <div className="feature">
+          <Malleable
+            id="feature-3-emoji"
+            as="div"
+            isActive={isEdit}
+            edits={edits}
+          >
+            🏎
+          </Malleable>
+          <Malleable
+            id="feature-3-text"
+            as="h4"
+            isActive={isEdit}
+            edits={edits}
+          >
+            Lighthouse 100
+          </Malleable>
+        </div>
+      </div>
+      <Malleable as="h2" id="title-2" isActive={isEdit} edits={edits}>
+        This demonstrates a static website generated using{" "}
+        <a target="_blank" rel="noopener" href="https://nextjs.org">
+          Next.js'
+        </a>{" "}
+        new{" "}
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://github.com/zeit/next.js/issues/9524"
+        >
+          Static Site Generation (SSG)
+        </a>
+        .
+      </Malleable>
+      <div className="explanation">
+        <div className="p">
+          <Malleable
+            id="explanation-1-inspect"
+            as="span"
+            isActive={isEdit}
+            edits={edits}
+          >
+            To inspect the response from{" "}
+            <a target="_blank" rel="noopener" href="https://zeit.co/smart-cdn">
+              our edge network
+            </a>
+            , run:
+          </Malleable>
+          <br />
+          <Malleable
+            id="explanation-1-pre-curl"
+            as="pre"
+            isActive={isEdit}
+            edits={edits}
+          >
+            curl -sI https://preview.ssg.how | grep x-now
+          </Malleable>
+          <Malleable
+            id="explanation-1-pre-response"
+            as="pre"
+            className="light"
+            isActive={isEdit}
+            edits={edits}
+          >
+            x-now-cache: HIT
+            <br />
+            x-now-trace: sfo1
+            <br />
+            x-now-id: sfo1:7c7lc-1583269874370-6a496f5a4e91
+          </Malleable>
+        </div>
+        <Malleable id="explanation-2" isActive={isEdit} edits={edits}>
+          When people visit this site, the response always comes instantly from
+          their{" "}
+          <a target="_blank" rel="noopener" href="https://zeit.co/smart-cdn">
+            nearest location
+          </a>
+          .
+        </Malleable>
+        <Malleable id="explanation-3" isActive={isEdit} edits={edits}>
+          Unlike traditional static solutions, however, you can generate
+          previews of edits that you can share with anyone you choose.
+        </Malleable>
+        <Malleable id="explanation-4" isActive={isEdit} edits={edits}>
+          This makes Next.js the most optimal framework to integrate into your
+          Headless CMS workflow.
+        </Malleable>
+      </div>
+    </>
+  );
+}
 
 export default Home;
