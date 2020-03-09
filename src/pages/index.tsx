@@ -298,11 +298,22 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         </Malleable>
         <Malleable id="explanation-3" isActive={isEdit} edits={edits}>
           Unlike traditional static solutions, however, you can generate
-          previews of edits that you can share with anyone you choose.
+          previews of edits that you can share with anyone you choose. To try it
+          out, click the Edit icon on the bottom right and edit the content.
+          When you're done, click the share icon on the bottom right to generate
+          a preview URL.
         </Malleable>
         <Malleable id="explanation-4" isActive={isEdit} edits={edits}>
-          This makes Next.js the most optimal framework to integrate into your
-          Headless CMS workflow.
+          SSG and Preview Mode make Next.js the most optimal framework to
+          integrate into your Headless CMS workflow. Learn more about the
+          preview mode on{" "}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://nextjs.org/docs/advanced-features/preview-mode"
+          >
+            our documentation.
+          </a>
         </Malleable>
       </div>
     </>
