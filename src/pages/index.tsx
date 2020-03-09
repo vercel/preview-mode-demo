@@ -237,9 +237,17 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         <a
           target="_blank"
           rel="noopener"
-          href="https://github.com/zeit/next.js/issues/9524"
+          href="https://nextjs.org/docs/basic-features/pages"
         >
           Static Site Generation (SSG)
+        </a>
+        . View the source on{" "}
+        <a
+          target="_blank"
+          rel="noopener"
+          href="https://github.com/zeit/preview-mode-demo"
+        >
+          GitHub
         </a>
         .
       </Malleable>
