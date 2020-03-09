@@ -206,6 +206,7 @@ hr {
 }
 
 [contenteditable="true"] {
+  min-width: 1ch; /* prevent user from making content uneditable */
   outline: 2px dashed var(--accents-3) !important;
   background-color: inherit;
   transition: all 0.2s ease;
