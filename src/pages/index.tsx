@@ -299,7 +299,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         <Malleable id="explanation-3" isActive={isEdit} edits={edits}>
           Unlike traditional static solutions, however, you can generate
           previews of edits that you can share with anyone you choose. To try it
-          out, click the Edit icon on the bottom right and edit the content.
+          out, click the edit icon on the bottom right and edit the content.
           When you're done, click the share icon on the bottom right to generate
           a preview URL.
         </Malleable>
