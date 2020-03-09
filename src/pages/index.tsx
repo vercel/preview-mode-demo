@@ -114,6 +114,10 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
     <>
       <Head>
         <title>Next.js | Preview Mode</title>
+        <meta
+          name="description"
+          content="This website demonstrates a static website generated using Next.js' new Static Site Generation (SSG)."
+        ></meta>
       </Head>
       {currentSnapshotId && (
         <ShareLinkDialog
