@@ -210,3 +210,7 @@ hr {
   color: var(--fg);
   transition: all 0.2s ease;
 }
+
+.text-muted {
+  color: var(--accents-3);
+}
