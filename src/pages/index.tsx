@@ -260,7 +260,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            curl -sI https://preview.ssg.how | grep x-now
+            curl -sI https://next-preview.now.sh | grep x-now
           </Malleable>
           <Malleable
             id="explanation-1-pre-response"
