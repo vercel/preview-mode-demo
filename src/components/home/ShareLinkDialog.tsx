@@ -1,7 +1,6 @@
 import { Dialog } from "@reach/dialog";
 import copy from "copy-to-clipboard";
 import { useCallback, useState } from "react";
-import Popover, { ArrowContainer } from "react-tiny-popover";
 import styles from "./ShareLinkDialog.module.css";
 
 export function ShareLinkDialog({
@@ -14,7 +13,6 @@ export function ShareLinkDialog({
   const shareUrl = `${window.origin}/s/${encodeURI(snapshotId)}`;
 
   const [didCopy, setCopied] = useState(false);
-
   const copyShareUrl = useCallback(() => {
     copy(shareUrl);
     setCopied(true);
@@ -25,25 +23,7 @@ export function ShareLinkDialog({
       <div className="p">
         You can now share your edits with anyone:
         <br />
-        <Popover
-          isOpen={didCopy}
-          position="bottom"
-          content={({ position, targetRect, popoverRect }) => (
-            <ArrowContainer
-              position={position}
-              targetRect={targetRect}
-              popoverRect={popoverRect}
-              arrowColor="black"
-              arrowSize={5}
-            >
-              <div className={styles.tooltip}>Copied!</div>
-            </ArrowContainer>
-          )}
-        >
-          <pre className={styles.copy} onClick={copyShareUrl}>
-            {shareUrl}
-          </pre>
-        </Popover>
+        <pre>{shareUrl}</pre>
       </div>
       <div className="p">
         What happened?
@@ -67,6 +47,9 @@ export function ShareLinkDialog({
         </ul>
       </div>
       <div data-cta>
+        <a href="javascript:void(0)" onClick={onExit}>
+          Dismiss
+        </a>
         <a
           target="_blank"
           rel="noopener"
@@ -74,7 +57,9 @@ export function ShareLinkDialog({
         >
           Learn More
         </a>
-        <button onClick={onExit}>Dismiss</button>
+        <button onClick={copyShareUrl}>
+          {didCopy ? "Copied" : "Copy URL"}
+        </button>
       </div>
     </Dialog>
   );

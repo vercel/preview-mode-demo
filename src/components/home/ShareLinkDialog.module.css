@@ -11,17 +11,25 @@
 }
 .dialog [data-cta] {
   display: flex;
-  justify-content: space-between;
+  width: 100%;
   align-items: center;
+  justify-content: space-between;
 }
 
-.copy {
-  cursor: pointer;
+.dialog [data-cta] > * {
+  flex-grow: 1;
 }
 
-.tooltip {
-  border-radius: 0.25rem;
-  background-color: black;
-  color: white;
-  padding: 0.25rem;
+.dialog [data-cta] > :last-child {
+  flex-grow: 1.5;
+}
+
+@media (max-width: 768px) {
+  .dialog [data-cta] {
+    flex-direction: column-reverse;
+  }
+
+  .dialog [data-cta] > * {
+    margin-bottom: 1em;
+  }
 }
