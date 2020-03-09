@@ -46,6 +46,7 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-sans);
+  line-height: 1.5;
 
   background-image: radial-gradient(#ddd 1px, transparent 1px),
     radial-gradient(#ddd 1px, transparent 1px);
@@ -70,10 +71,6 @@ body {
   align-items: center;
   display: inline-flex;
   margin: 0 auto;
-}
-
-.feature > div {
-  line-height: 1.5em;
 }
 
 .feature > h4 {
