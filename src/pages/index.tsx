@@ -301,7 +301,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
           previews of edits that you can share with anyone you choose. To try it
           out, click the edit icon on the bottom right and edit the content.
           When you're done, click the share icon on the bottom right to generate
-          a preview URL.
+          a shareable preview URL.
         </Malleable>
         <Malleable id="explanation-4" isActive={isEdit} edits={edits}>
           SSG and Preview Mode make Next.js the most optimal framework to
