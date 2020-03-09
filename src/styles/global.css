@@ -72,6 +72,10 @@ body {
   margin: 0 auto;
 }
 
+.feature > div {
+  line-height: 1.5em;
+}
+
 .feature > h4 {
   margin: 0 0 0 0.5rem;
   font-weight: 700;
@@ -83,6 +87,7 @@ body {
   .feature {
     flex-direction: column;
     margin-bottom: var(--gap);
+    min-width: 50%;
   }
   .feature > h4 {
     margin: 0;
