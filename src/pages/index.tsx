@@ -3,6 +3,7 @@ import { NextPage } from "next";
 import Head from "next/head";
 import { useCallback, useRef, useState } from "react";
 import Edit from "../components/edit";
+import { ErrorDialog } from "../components/error";
 import { ShareLinkDialog } from "../components/home/ShareLinkDialog";
 import Malleable, { FieldEdit } from "../components/malleable";
 import Snapshot from "../components/snapshot";
@@ -82,6 +83,12 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
     },
     [hasSaveRequest, _setSharing]
   );
+
+  const [currentError, setError] = useState<Error>(null);
+  const onClearError = useCallback(() => {
+    setError(null);
+  }, [setError]);
+
   const share = useCallback(() => {
     if (hasSaveRequest.current) return;
     setSharing(true);
@@ -98,11 +105,16 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
         headers: { "content-type": "application/json" },
       })
       .then(res => {
-        // TODO: handle !res.ok
-        return res.json();
+        if (res.ok) return res.json();
+        return new Promise(async (_, reject) =>
+          reject(new Error(await res.text()))
+        );
       })
       .then(({ snapshotId }) => {
         setSnapshotId(snapshotId);
+      })
+      .catch(err => {
+        setError(err);
       })
       .finally(() => {
         setSharing(false);
@@ -119,6 +131,15 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
           content="This website demonstrates a static website generated using Next.js' new Static Site Generation (SSG)."
         ></meta>
       </Head>
+      {currentError && (
+        <ErrorDialog onExit={onClearError}>
+          <p>
+            An error occurred while saving your snapshot. Please try again in a
+            bit.
+          </p>
+          <pre>{currentError.message}</pre>
+        </ErrorDialog>
+      )}
       {currentSnapshotId && (
         <ShareLinkDialog
           snapshotId={currentSnapshotId}

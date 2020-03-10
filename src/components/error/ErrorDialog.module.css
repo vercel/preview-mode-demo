@@ -1,0 +1,11 @@
+.dialog {
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+}
+
+.footer button {
+  width: 35%;
+}
