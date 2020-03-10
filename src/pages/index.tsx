@@ -15,8 +15,8 @@ import layoutStyles from "../styles/layout.module.css";
 const s3 = new S3({
   credentials: {
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY
-  }
+    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+  },
 });
 
 export async function getStaticProps({
@@ -26,7 +26,7 @@ export async function getStaticProps({
   // `previewData` is only set when `preview` is `true`, and contains whatever
   // user-specific data was set in `res.setPreviewData`. See the API endpoint
   // that enters "Preview Mode" for more info (api/share/[snapshotId].tsx).
-  previewData
+  previewData,
 }) {
   if (preview) {
     const { snapshotId } = previewData as { snapshotId: string };
@@ -36,13 +36,13 @@ export async function getStaticProps({
       const object = await s3
         .getObject({
           Bucket: process.env.AWS_S3_BUCKET,
-          Key: `${snapshotId}.json`
+          Key: `${snapshotId}.json`,
         })
         .promise();
 
       const contents = JSON.parse(object.Body.toString());
       return {
-        props: { isPreview: true, snapshotId, contents }
+        props: { isPreview: true, snapshotId, contents },
       };
     } catch (e) {
       return {
@@ -54,8 +54,8 @@ export async function getStaticProps({
             // objects, but the bucket itself is private.
             e.statusCode === 403
               ? "The requested preview edit does not exist!"
-              : "An error has occurred while connecting to S3. Please refresh the page to try again."
-        }
+              : "An error has occurred while connecting to S3. Please refresh the page to try again.",
+        },
       };
     }
   }
@@ -95,7 +95,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
       .fetch(`/api/save`, {
         method: "POST",
         body: JSON.stringify(persistContents),
-        headers: { "content-type": "application/json" }
+        headers: { "content-type": "application/json" },
       })
       .then(res => {
         // TODO: handle !res.ok
@@ -240,14 +240,6 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
           href="https://nextjs.org/docs/basic-features/pages"
         >
           Static Site Generation (SSG)
-        </a>
-        . View the source on{" "}
-        <a
-          target="_blank"
-          rel="noopener"
-          href="https://github.com/zeit/preview-mode-demo"
-        >
-          GitHub
         </a>
         .
       </Malleable>
