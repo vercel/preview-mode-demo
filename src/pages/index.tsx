@@ -293,7 +293,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            curl -sI https://next-preview.now.sh | grep x-now
+            curl -sI https://next-preview.now.sh | grep x-vercel
           </Malleable>
           <Malleable
             id="explanation-1-pre-response"
@@ -302,11 +302,11 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            x-now-cache: HIT
+            x-vercel-cache: HIT
             <br />
-            x-now-trace: sfo1
+            x-vercel-trace: sfo1
             <br />
-            x-now-id: sfo1:7c7lc-1583269874370-6a496f5a4e91
+            x-vercel-id: sfo1:7c7lc-1583269874370-6a496f5a4e91
           </Malleable>
         </div>
         <Malleable id="explanation-2" isActive={isEdit} edits={edits}>
