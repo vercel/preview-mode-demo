@@ -293,7 +293,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            curl -sI https://next-preview.now.sh | grep x-now
+            curl -sI https://next-preview.now.sh | grep x-vercel
           </Malleable>
           <Malleable
             id="explanation-1-pre-response"
