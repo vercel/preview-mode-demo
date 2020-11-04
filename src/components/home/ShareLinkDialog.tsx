@@ -5,7 +5,7 @@ import styles from "./ShareLinkDialog.module.css";
 
 export function ShareLinkDialog({
   snapshotId,
-  onExit
+  onExit,
 }: {
   snapshotId: string;
   onExit: () => void;
@@ -33,7 +33,7 @@ export function ShareLinkDialog({
             <a
               target="_blank"
               rel="noopener"
-              href="https://github.com/zeit/next.js/issues/9524"
+              href="https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation"
             >
               Next.js SSG
             </a>
@@ -53,7 +53,7 @@ export function ShareLinkDialog({
         <a
           target="_blank"
           rel="noopener"
-          href="https://github.com/zeit/next.js/issues/9524"
+          href="https://nextjs.org/docs/basic-features/data-fetching#preview-mode"
         >
           Learn More
         </a>
