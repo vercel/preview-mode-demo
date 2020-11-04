@@ -16,8 +16,8 @@ import layoutStyles from "../styles/layout.module.css";
 const s3 = new S3({
   credentials: {
     accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID,
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY
-  }
+    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY,
+  },
 });
 
 export async function getStaticProps({
@@ -27,7 +27,7 @@ export async function getStaticProps({
   // `previewData` is only set when `preview` is `true`, and contains whatever
   // user-specific data was set in `res.setPreviewData`. See the API endpoint
   // that enters "Preview Mode" for more info (api/share/[snapshotId].tsx).
-  previewData
+  previewData,
 }) {
   if (preview) {
     const { snapshotId } = previewData as { snapshotId: string };
@@ -37,13 +37,13 @@ export async function getStaticProps({
       const object = await s3
         .getObject({
           Bucket: process.env.AWS_S3_BUCKET,
-          Key: `${snapshotId}.json`
+          Key: `${snapshotId}.json`,
         })
         .promise();
 
       const contents = JSON.parse(object.Body.toString());
       return {
-        props: { isPreview: true, snapshotId, contents }
+        props: { isPreview: true, snapshotId, contents },
       };
     } catch (e) {
       return {
@@ -55,15 +55,15 @@ export async function getStaticProps({
             // objects, but the bucket itself is private.
             e.statusCode === 403
               ? "The requested preview edit does not exist!"
-              : "An error has occurred while connecting to S3. Please refresh the page to try again."
-        }
+              : "An error has occurred while connecting to S3. Please refresh the page to try again.",
+        },
       };
     }
   }
   return { props: { isPreview: false } };
 }
 
-const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
+const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
   // Scroll to top on mount as to ensure the user sees the "Preview Mode" bar
   useScrollReset();
 
@@ -102,9 +102,9 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
       .fetch(`/api/save`, {
         method: "POST",
         body: JSON.stringify(persistContents),
-        headers: { "content-type": "application/json" }
+        headers: { "content-type": "application/json" },
       })
-      .then(res => {
+      .then((res) => {
         if (res.ok) return res.json();
         return new Promise(async (_, reject) =>
           reject(new Error(await res.text()))
@@ -113,7 +113,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = props => {
       .then(({ snapshotId }) => {
         setSnapshotId(snapshotId);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err);
       })
       .finally(() => {
@@ -293,7 +293,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            curl -sI https://next-preview.now.sh | grep x-vercel
+            curl -sI https://next-preview.vercel.app | grep x-vercel
           </Malleable>
           <Malleable
             id="explanation-1-pre-response"
@@ -304,9 +304,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
           >
             x-vercel-cache: HIT
             <br />
-            x-vercel-trace: sfo1
-            <br />
-            x-vercel-id: sfo1:7c7lc-1583269874370-6a496f5a4e91
+            x-vercel-id: cle1::zzq7g-1604525989923-a33b3946ccee
           </Malleable>
         </div>
         <Malleable id="explanation-2" isActive={isEdit} edits={edits}>

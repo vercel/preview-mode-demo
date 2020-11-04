@@ -11,7 +11,7 @@ that fits your use case best on a per-page basis:
 This application solely focuses on Static Generation (using `getStaticProps`),
 however, with a game-changing new feature: Preview Mode.
 
-[Take Preview Mode for a spin](https://next-preview.now.sh/)!
+[Take Preview Mode for a spin](https://next-preview.vercel.app/)!
 
 Preview Mode leverages Next.js' on-demand rendering capabilities to bypass the
 statically prerendered page and render the page on-demand for
