@@ -1,15 +1,15 @@
-import React, { useMemo, useState } from "react";
-import { createEditor, Node } from "slate";
-import { withHistory } from "slate-history";
-import { Editable, Slate, withReact } from "slate-react";
-import { ValidElementTypes } from "./index";
+import React, { useMemo, useState } from 'react';
+import { createEditor, Node } from 'slate';
+import { withHistory } from 'slate-history';
+import { Editable, Slate, withReact } from 'slate-react';
+import { ValidElementTypes } from './index';
 
 export default function SlateWrapper({
   As,
   id,
   className,
   initialText,
-  noop
+  noop,
 }: {
   As: ValidElementTypes;
   id: string;
@@ -17,9 +17,10 @@ export default function SlateWrapper({
   initialText: string;
   noop?: boolean;
 }) {
-  const originalState = useMemo(() => [{ children: [{ text: initialText }] }], [
-    initialText
-  ]);
+  const originalState = useMemo(
+    () => [{ children: [{ text: initialText }] }],
+    [initialText]
+  );
   const [value, setValue] = useState<Node[]>(originalState);
 
   const editor = useMemo(() => withHistory(withReact(createEditor())), []);
@@ -28,8 +29,12 @@ export default function SlateWrapper({
 
   return (
     <As id={id} className={className}>
-      <Slate editor={editor} value={value} onChange={value => setValue(value)}>
-        <Editable placeholder={"..."} />
+      <Slate
+        editor={editor}
+        value={value}
+        onChange={(value) => setValue(value)}
+      >
+        <Editable placeholder={'...'} />
       </Slate>
     </As>
   );

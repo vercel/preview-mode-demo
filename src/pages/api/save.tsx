@@ -1,6 +1,6 @@
-import S3 from "aws-sdk/clients/s3";
-import { NextApiHandler } from "next";
-import { generate as generateId } from "shortid";
+import S3 from 'aws-sdk/clients/s3';
+import type { NextApiRequest, NextApiResponse } from 'next';
+import { generate as generateId } from 'shortid';
 
 // Initialize S3 instance in module scope for re-use across requests.
 const s3 = new S3({
@@ -10,7 +10,7 @@ const s3 = new S3({
   },
 });
 
-const handler: NextApiHandler = async (req, res) => {
+export default async (req: NextApiRequest, res: NextApiResponse) => {
   // Generate a friendly ID for this save request:
   const snapshotId = generateId();
 
@@ -31,7 +31,7 @@ const handler: NextApiHandler = async (req, res) => {
       .promise();
   } catch (err) {
     console.error(err);
-    res.status(500).send("Internal Server Error");
+    res.status(500).send('Internal Server Error');
     return res.end();
   }
 
@@ -43,8 +43,6 @@ const handler: NextApiHandler = async (req, res) => {
 
 export const config = {
   api: {
-    bodyParser: { sizeLimit: "256kb" },
+    bodyParser: { sizeLimit: '256kb' },
   },
 };
-
-export default handler;

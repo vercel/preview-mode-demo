@@ -1,13 +1,11 @@
-import { NextApiHandler } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const handler: NextApiHandler = async (req, res) => {
+export default (req: NextApiRequest, res: NextApiResponse) => {
   // Exit the current user from "Preview Mode". This function accepts no args.
   res.clearPreviewData();
 
   // Redirect the user back to the index page. Normally, you'd redirect them to
   // a `next`-URL query parameter or from other state.
-  res.writeHead(307, { Location: "/" });
+  res.writeHead(307, { Location: '/' });
   res.end();
 };
-
-export default handler;

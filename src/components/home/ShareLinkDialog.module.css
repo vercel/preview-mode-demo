@@ -4,10 +4,10 @@
 }
 
 .dialog li:first-child {
-  list-style-type: "🚀";
+  list-style-type: '🚀';
 }
 .dialog li:last-child {
-  list-style-type: "🤯";
+  list-style-type: '🤯';
 }
 .dialog [data-cta] {
   display: flex;

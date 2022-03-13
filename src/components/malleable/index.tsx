@@ -1,25 +1,25 @@
-import React, { Suspense, useEffect, useMemo, useRef, useState } from "react";
-import { createPortal } from "react-dom";
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 
 export type FieldEdit = { id: string; innerText: string };
 
 export type ValidElementTypes =
-  | "p"
-  | "div"
-  | "span"
-  | "h1"
-  | "h2"
-  | "h3"
-  | "h4"
-  | "pre";
+  | 'p'
+  | 'div'
+  | 'span'
+  | 'h1'
+  | 'h2'
+  | 'h3'
+  | 'h4'
+  | 'pre';
 
-const SlateWrapper = React.lazy(() => import("./editor"));
+const SlateWrapper = React.lazy(() => import('./editor'));
 
 function PreloadSlateWrapper() {
   const el = useMemo(() => {
     // This doesn't actually need to be in the DOM
-    const el = document.createElement("div");
-    el.setAttribute("hidden", "hidden");
+    const el = document.createElement('div');
+    el.setAttribute('hidden', 'hidden');
     return el;
   }, []);
 
@@ -35,9 +35,9 @@ export default function Malleable({
   id,
   isActive,
   children,
-  as: As = "p",
+  as: As = 'p',
   className,
-  edits
+  edits,
 }: {
   id: string;
   isActive: boolean;
@@ -47,22 +47,22 @@ export default function Malleable({
   edits: FieldEdit[];
 }) {
   const editedChildren = useMemo(
-    () => edits?.find(c => c?.id === id)?.innerText || children,
+    () => edits?.find((c) => c?.id === id)?.innerText || children,
     [edits, children, id]
   );
 
   const contentRef = useRef<HTMLElement>();
-  const [initialText, setInitialText] = useState<string>("");
+  const [initialText, setInitialText] = useState<string>('');
   useEffect(() => {
     if (isActive || !contentRef.current) return;
     setInitialText(contentRef.current.innerText);
   }, [editedChildren, isActive, contentRef.current]);
 
-  if (As === "p") {
-    As = "div";
-    className += " p";
-  } else if (As === "span") {
-    className += " span";
+  if (As === 'p') {
+    As = 'div';
+    className += ' p';
+  } else if (As === 'span') {
+    className += ' span';
   }
 
   if (isActive) {
@@ -71,7 +71,7 @@ export default function Malleable({
         fallback={
           <As
             ref={contentRef as any}
-            className={className + " text-muted"}
+            className={className + ' text-muted'}
             id={id}
           >
             {editedChildren}
@@ -92,12 +92,14 @@ export default function Malleable({
       <As ref={contentRef as any} className={className} id={id}>
         {editedChildren}
       </As>
-      {// Detect application hydration
-      initialText !== "" && (
-        // Prerender the Slate editor to trigger `React.lazy` loading (thereby
-        // skipping fallback state)
-        <PreloadSlateWrapper />
-      )}
+      {
+        // Detect application hydration
+        initialText !== '' && (
+          // Prerender the Slate editor to trigger `React.lazy` loading (thereby
+          // skipping fallback state)
+          <PreloadSlateWrapper />
+        )
+      }
     </>
   );
 }
