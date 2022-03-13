@@ -1,5 +1,5 @@
 import S3 from 'aws-sdk/clients/s3';
-import { NextPage } from 'next';
+import { GetStaticProps } from 'next';
 import Head from 'next/head';
 import { useCallback, useRef, useState } from 'react';
 import Edit from '../components/edit';
@@ -20,7 +20,7 @@ const s3 = new S3({
   },
 });
 
-export async function getStaticProps({
+export const getStaticProps: GetStaticProps = async ({
   // `preview` is a Boolean, specifying whether or not the application is in
   // "Preview Mode":
   preview,
@@ -28,7 +28,7 @@ export async function getStaticProps({
   // user-specific data was set in `res.setPreviewData`. See the API endpoint
   // that enters "Preview Mode" for more info (api/share/[snapshotId].tsx).
   previewData,
-}) {
+}) => {
   if (preview) {
     const { snapshotId } = previewData as { snapshotId: string };
     try {
@@ -61,9 +61,9 @@ export async function getStaticProps({
     }
   }
   return { props: { isPreview: false } };
-}
+};
 
-const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
+export default function Home(props) {
   // Scroll to top on mount as to ensure the user sees the "Preview Mode" bar
   useScrollReset();
 
@@ -185,7 +185,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
       )}
     </>
   );
-};
+}
 
 function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
   return (
@@ -338,5 +338,3 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
     </>
   );
 }
-
-export default Home;
