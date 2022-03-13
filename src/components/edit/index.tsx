@@ -1,5 +1,5 @@
-import EditSvg from "../svgs/edit";
-import styles from "./index.module.css";
+import EditSvg from '../svgs/edit';
+import styles from './index.module.css';
 
 export default function Edit({ onClick }) {
   return (

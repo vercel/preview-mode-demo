@@ -1,10 +1,9 @@
-import { NextApiHandler } from "next";
+import type { NextApiRequest, NextApiResponse } from 'next';
 
-const handler: NextApiHandler = async (req, res) => {
+export default (req: NextApiRequest, res: NextApiResponse) => {
   // Next.js passes the URL parameters as values in the query string object to
   // API endpoints:
   const { snapshotId } = req.query;
-  console.log("set snapshot: " + snapshotId);
 
   // Enter the current user into "Preview Mode" by calling `setPreviewData` on
   // the API response.
@@ -15,8 +14,6 @@ const handler: NextApiHandler = async (req, res) => {
 
   // Redirect the user back to the index page. Normally, you'd redirect them to
   // a `next`-URL query parameter or from other state.
-  res.writeHead(307, { Location: "/" });
+  res.writeHead(307, { Location: '/' });
   res.end();
 };
-
-export default handler;

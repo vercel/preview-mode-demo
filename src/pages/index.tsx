@@ -1,14 +1,14 @@
-import S3 from "aws-sdk/clients/s3";
-import { NextPage } from "next";
-import Head from "next/head";
-import { useCallback, useRef, useState } from "react";
-import Edit from "../components/edit";
-import { ErrorDialog } from "../components/error";
-import { ShareLinkDialog } from "../components/home/ShareLinkDialog";
-import Malleable, { FieldEdit } from "../components/malleable";
-import Snapshot from "../components/snapshot";
-import { useScrollReset } from "../hooks/use-scroll-reset";
-import layoutStyles from "../styles/layout.module.css";
+import S3 from 'aws-sdk/clients/s3';
+import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import { useCallback, useRef, useState } from 'react';
+import Edit from '../components/edit';
+import { ErrorDialog } from '../components/error';
+import { ShareLinkDialog } from '../components/home/ShareLinkDialog';
+import Malleable, { FieldEdit } from '../components/malleable';
+import Snapshot from '../components/snapshot';
+import { useScrollReset } from '../hooks/use-scroll-reset';
+import layoutStyles from '../styles/layout.module.css';
 
 // Next.js automatically eliminates code used for `getStaticProps`!
 // This code (and the `aws-sdk` import) will be absent from the final client-
@@ -20,7 +20,7 @@ const s3 = new S3({
   },
 });
 
-export async function getStaticProps({
+export const getStaticProps: GetStaticProps = async ({
   // `preview` is a Boolean, specifying whether or not the application is in
   // "Preview Mode":
   preview,
@@ -28,7 +28,7 @@ export async function getStaticProps({
   // user-specific data was set in `res.setPreviewData`. See the API endpoint
   // that enters "Preview Mode" for more info (api/share/[snapshotId].tsx).
   previewData,
-}) {
+}) => {
   if (preview) {
     const { snapshotId } = previewData as { snapshotId: string };
     try {
@@ -54,16 +54,16 @@ export async function getStaticProps({
             // 403 implies 404 in this case, as our IAM user has access to all
             // objects, but the bucket itself is private.
             e.statusCode === 403
-              ? "The requested preview edit does not exist!"
-              : "An error has occurred while connecting to S3. Please refresh the page to try again.",
+              ? 'The requested preview edit does not exist!'
+              : 'An error has occurred while connecting to S3. Please refresh the page to try again.',
         },
       };
     }
   }
   return { props: { isPreview: false } };
-}
+};
 
-const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
+export default function Home(props) {
   // Scroll to top on mount as to ensure the user sees the "Preview Mode" bar
   useScrollReset();
 
@@ -93,16 +93,16 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
     if (hasSaveRequest.current) return;
     setSharing(true);
 
-    const els = document.querySelectorAll("[id] > [contenteditable=true]");
+    const els = document.querySelectorAll('[id] > [contenteditable=true]');
     const persistContents: FieldEdit[] = [].slice
       .call(els)
       .map(({ parentNode: { id }, innerText }) => ({ id, innerText }));
 
     self
       .fetch(`/api/save`, {
-        method: "POST",
+        method: 'POST',
         body: JSON.stringify(persistContents),
-        headers: { "content-type": "application/json" },
+        headers: { 'content-type': 'application/json' },
       })
       .then((res) => {
         if (res.ok) return res.json();
@@ -156,7 +156,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
           <>
             <h1>Oops</h1>
             <h2>Something unique to your preview went wrong.</h2>
-            <div className="explanation" style={{ textAlign: "center" }}>
+            <div className="explanation" style={{ textAlign: 'center' }}>
               <p>
                 The production website is <strong>still available</strong> and
                 this does not affect other users.
@@ -164,7 +164,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
             </div>
             <hr />
             <h2>Reason</h2>
-            <div className="explanation" style={{ textAlign: "center" }}>
+            <div className="explanation" style={{ textAlign: 'center' }}>
               <p>{props.message}</p>
             </div>
           </>
@@ -185,7 +185,7 @@ const Home: NextPage<GetProps<typeof getStaticProps>> = (props) => {
       )}
     </>
   );
-};
+}
 
 function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
   return (
@@ -250,19 +250,19 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         </div>
       </div>
       <Malleable as="h2" id="title-2" isActive={isEdit} edits={edits}>
-        This demonstrates a static website generated using{" "}
+        This demonstrates a static website generated using{' '}
         <a target="_blank" rel="noopener" href="https://nextjs.org">
           Next.js'
-        </a>{" "}
-        new{" "}
+        </a>{' '}
+        new{' '}
         <a
           target="_blank"
           rel="noopener"
-          href="https://nextjs.org/docs/basic-features/pages"
+          href="https://nextjs.org/docs/basic-features/data-fetching/get-static-props"
         >
           Static Site Generation (SSG)
         </a>
-        . View the source on{" "}
+        . View the source on{' '}
         <a
           target="_blank"
           rel="noopener"
@@ -280,8 +280,12 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             isActive={isEdit}
             edits={edits}
           >
-            To inspect the response from{" "}
-            <a target="_blank" rel="noopener" href="https://vercel.com/cdn">
+            To inspect the response from{' '}
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://vercel.com/docs/concepts/edge-network/overview"
+            >
               our edge network
             </a>
             , run:
@@ -309,8 +313,12 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         </div>
         <Malleable id="explanation-2" isActive={isEdit} edits={edits}>
           When people visit this site, the response always comes instantly from
-          their{" "}
-          <a target="_blank" rel="noopener" href="https://vercel.com/cdn">
+          their{' '}
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://vercel.com/docs/concepts/edge-network/overview"
+          >
             nearest location
           </a>
           .
@@ -325,7 +333,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         <Malleable id="explanation-4" isActive={isEdit} edits={edits}>
           SSG and Preview Mode make Next.js the most optimal framework to
           integrate into your Headless CMS workflow. Learn more about the
-          preview mode on{" "}
+          preview mode on{' '}
           <a
             target="_blank"
             rel="noopener"
@@ -338,5 +346,3 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
     </>
   );
 }
-
-export default Home;

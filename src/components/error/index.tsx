@@ -1,6 +1,6 @@
-import { Dialog } from "@reach/dialog";
-import { ReactNode } from "react";
-import styles from "./ErrorDialog.module.css";
+import { Dialog } from '@reach/dialog';
+import { ReactNode } from 'react';
+import styles from './ErrorDialog.module.css';
 
 export function ErrorDialog({
   children,

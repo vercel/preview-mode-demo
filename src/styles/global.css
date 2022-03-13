@@ -23,8 +23,8 @@
 
   --radius: 8px;
 
-  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   --font-mono: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
     Bitstream Vera Sans Mono, Courier New, monospace;
@@ -202,13 +202,13 @@ hr {
   margin: 2em auto;
 }
 
-[contenteditable="true"] {
+[contenteditable='true'] {
   min-width: 1ch; /* prevent user from making content uneditable */
   outline: 2px dashed var(--accents-3) !important;
   background-color: inherit;
   transition: all 0.2s ease;
 }
-[contenteditable="true"]:focus {
+[contenteditable='true']:focus {
   background-color: rgb(253, 236, 189);
   color: var(--fg);
   transition: all 0.2s ease;

@@ -1,7 +1,7 @@
-import { Dialog } from "@reach/dialog";
-import copy from "copy-to-clipboard";
-import { useCallback, useState } from "react";
-import styles from "./ShareLinkDialog.module.css";
+import { Dialog } from '@reach/dialog';
+import copy from 'copy-to-clipboard';
+import { useCallback, useState } from 'react';
+import styles from './ShareLinkDialog.module.css';
 
 export function ShareLinkDialog({
   snapshotId,
@@ -29,18 +29,18 @@ export function ShareLinkDialog({
         What happened?
         <ul>
           <li>
-            The page you first loaded is fully static and built with{" "}
+            The page you first loaded is fully static and built with{' '}
             <a
               target="_blank"
               rel="noopener"
-              href="https://nextjs.org/docs/basic-features/data-fetching#getstaticprops-static-generation"
+              href="https://nextjs.org/docs/basic-features/data-fetching/get-static-props"
             >
               Next.js SSG
             </a>
             .
           </li>
           <li>
-            Additionally, Next.js gave us the ability to generate <em>new</em>{" "}
+            Additionally, Next.js gave us the ability to generate <em>new</em>{' '}
             versions of that page at runtime, which we used to generate
             previews.
           </li>
@@ -53,12 +53,12 @@ export function ShareLinkDialog({
         <a
           target="_blank"
           rel="noopener"
-          href="https://nextjs.org/docs/basic-features/data-fetching#preview-mode"
+          href="https://nextjs.org/docs/advanced-features/preview-mode"
         >
           Learn More
         </a>
         <button onClick={copyShareUrl}>
-          {didCopy ? "Copied" : "Copy URL"}
+          {didCopy ? 'Copied' : 'Copy URL'}
         </button>
       </div>
     </Dialog>

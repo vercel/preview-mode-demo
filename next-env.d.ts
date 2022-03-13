@@ -1,9 +1,5 @@
 /// <reference types="next" />
-/// <reference types="next/types/global" />
+/// <reference types="next/image-types/global" />
 
-type ThenArg<T> = T extends PromiseLike<infer U> ? U : T;
-type GetProps<T extends (...args: any) => any> = ThenArg<
-  ReturnType<T>
-> extends { props: infer U }
-  ? U
-  : never;
+// NOTE: This file should not be edited
+// see https://nextjs.org/docs/basic-features/typescript for more information.

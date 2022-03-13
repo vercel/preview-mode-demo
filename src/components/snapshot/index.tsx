@@ -1,18 +1,18 @@
-import { useEffect } from "react";
-import CancelSvg from "../svgs/cancel";
-import ShareSvg from "../svgs/share";
-import styles from "./index.module.css";
+import { useEffect } from 'react';
+import CancelSvg from '../svgs/cancel';
+import ShareSvg from '../svgs/share';
+import styles from './index.module.css';
 
 export default function Cancel({ onCancel, onShare, isSharing }) {
   useEffect(() => {
     function listener(e: KeyboardEvent) {
-      if (e.metaKey && e.key === "Enter") {
+      if (e.metaKey && e.key === 'Enter') {
         onShare();
       }
     }
-    document.addEventListener("keydown", listener);
+    document.addEventListener('keydown', listener);
     return () => {
-      document.removeEventListener("keydown", listener);
+      document.removeEventListener('keydown', listener);
     };
   }, [onShare]);
 
@@ -24,14 +24,14 @@ export default function Cancel({ onCancel, onShare, isSharing }) {
         </div>
       )}
       <div
-        className={`${styles.share} ${isSharing ? styles["pending-bg"] : ""}`}
+        className={`${styles.share} ${isSharing ? styles['pending-bg'] : ''}`}
         onClick={onShare}
-        style={isSharing ? { pointerEvents: "none" } : {}}
+        style={isSharing ? { pointerEvents: 'none' } : {}}
       >
         {isSharing ? (
           <div className="sk-fading-circle">
             {Array(12)
-              .fill("")
+              .fill('')
               .map((_, index) => (
                 <div
                   key={`sk-circle${index + 1}`}
