@@ -258,7 +258,7 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         <a
           target="_blank"
           rel="noopener"
-          href="https://nextjs.org/docs/basic-features/pages"
+          href="https://nextjs.org/docs/basic-features/data-fetching/get-static-props"
         >
           Static Site Generation (SSG)
         </a>
@@ -281,7 +281,11 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
             edits={edits}
           >
             To inspect the response from{' '}
-            <a target="_blank" rel="noopener" href="https://vercel.com/cdn">
+            <a
+              target="_blank"
+              rel="noopener"
+              href="https://vercel.com/docs/concepts/edge-network/overview"
+            >
               our edge network
             </a>
             , run:
@@ -310,7 +314,11 @@ function Content({ isEdit, edits }: { isEdit: boolean; edits: FieldEdit[] }) {
         <Malleable id="explanation-2" isActive={isEdit} edits={edits}>
           When people visit this site, the response always comes instantly from
           their{' '}
-          <a target="_blank" rel="noopener" href="https://vercel.com/cdn">
+          <a
+            target="_blank"
+            rel="noopener"
+            href="https://vercel.com/docs/concepts/edge-network/overview"
+          >
             nearest location
           </a>
           .
