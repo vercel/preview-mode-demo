@@ -1,7 +1,7 @@
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withContentlayer()({
+module.exports = {
   // swcMinify: true,
   // reactStrictMode: true,
   async rewrites() {
@@ -19,4 +19,4 @@ module.exports = withContentlayer()({
     console.log({ bucket: process.env.AWS_S3_BUCKET });
     return config;
   },
-});
+};
